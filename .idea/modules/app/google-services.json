@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "476714933050",
+    "firebase_url": "https://mysteryhistories-c9297.firebaseio.com",
+    "project_id": "mysteryhistories-c9297",
+    "storage_bucket": "mysteryhistories-c9297.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476714933050:android:4292aa3cc07ba456328e03",
+        "android_client_info": {
+          "package_name": "com.mysteryinc.beta_mysteryhistories"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "476714933050-0bhhoi7d7d0udobttl31kg6n9asooi1l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mysteryinc.beta_mysteryhistories",
+            "certificate_hash": "9e7875659621f5fa7d078eede486b85df75f8fc5"
+          }
+        },
+        {
+          "client_id": "476714933050-gdr8l8p6v0k54e74105kkkulbjk7orfh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAL9AGkfpQep4N1mYU4r19mDTkkBPzQF0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "476714933050-gdr8l8p6v0k54e74105kkkulbjk7orfh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

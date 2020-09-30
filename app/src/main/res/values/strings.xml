@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Beta_MysteryHistories</string>
+    <string name="titulo">Mystery Histories</string>
+    <string name="cultura">Cultura</string>
+    <string name="misterio">Misterios</string>
+    <string name="boton">BUSCAR</string>
+    <string name="titulolista">Lista de Misterios</string>
+</resources>
