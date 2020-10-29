@@ -3,6 +3,7 @@ package com.mysteryinc.beta_mysteryhistories;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,7 +58,6 @@ public class Misterios_Act extends AppCompatActivity implements AdapterView.OnIt
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("TAG", document.getId() + " => " + document.getData().get("nombre"));
                                 lista.add(document.getData().get("nombre").toString());
-                                //Toast.makeText(getApplicationContext(),valor,Toast.LENGTH_LONG).show();
                             }
                             Mostrar(lista);
 
@@ -66,13 +66,7 @@ public class Misterios_Act extends AppCompatActivity implements AdapterView.OnIt
                         }
                     }
                 });
-/*
-        String[] ciud = new String[]{"El Salvador","Diego Almagro","Copiapoh"};
 
-        ArrayAdapter <String> adaptador2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ciud);
-
-
-        sp2.setAdapter(adaptador2);*/
     }
     public void Mostrar(List<String> lista){
 
@@ -96,6 +90,14 @@ public class Misterios_Act extends AppCompatActivity implements AdapterView.OnIt
         adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, lista2);
         sp2.setAdapter(adaptador);
 
+    }
+    public void AbrirLista(View v){
+        //Crear intent
+        Intent act = new Intent(this, Misterios_Lista.class);
+        //Agregar datos al intent
+        act.putExtra("datos", sp2.getSelectedItem().toString());
+        //Lanzar segunda activity
+        startActivity(act);
     }
     public void CargarCiudades(String prov){
 

@@ -5,4 +5,6 @@
     <string name="misterio">Misterios</string>
     <string name="boton">BUSCAR</string>
     <string name="titulolista">Lista de Misterios</string>
+    <string name="title_activity_misterios__map">Map</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAL9AGkfpQep4N1mYU4r19mDTkkBPzQF0s</string>
 </resources>
