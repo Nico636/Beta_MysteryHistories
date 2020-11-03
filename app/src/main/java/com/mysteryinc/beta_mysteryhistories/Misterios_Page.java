@@ -8,6 +8,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -81,17 +84,17 @@ public class Misterios_Page extends AppCompatActivity  {
     }
 
     public void AbrirMapa(View v){
-        /*
+
         db.collection("misterios")
-                .whereEqualTo("titulo", titulo)
+                .whereEqualTo("titulo", tx.getText().toString())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
-                                CargarImagen(document.getData().get("img").toString(),document.getData().get("historia").toString());
+                                String coord = document.getData().get("ubicacion").toString();
+                                AbrirMapa2(coord);
                             }
 
                         } else {
@@ -99,9 +102,27 @@ public class Misterios_Page extends AppCompatActivity  {
                         }
                     }
                 });
+
+
+    }
+    public void AbrirMapa2(String coord) {
+        String Uno = coord.replace('{', ' ');
+        String Dos = Uno.replace('}', ' ');
+        String Tres = Dos.trim();
+        String Cuatro = Tres.substring(20);
+        String[] Cinco = Cuatro.split(",", 2);
+
+
+        String Seis = Cinco[1].substring(11);
+        String Siete = Seis.trim();
+        //Toast.makeText(this,Siete+"    "+Cinco[0],Toast.LENGTH_SHORT).show();
+
+
         Intent act = new Intent(this, Misterios_Map.class);
+        act.putExtra("Lat", Cinco[0]);
+        act.putExtra("Lng", Siete);
+        act.putExtra("Nombre", tx.getText().toString());
+        startActivity(act);
 
-
-        startActivity(act);*/
     }
 }

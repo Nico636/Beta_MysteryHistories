@@ -37,10 +37,12 @@ public class Misterios_Map extends FragmentActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        String Lat = getIntent().getStringExtra("Lat");
+        String Lng = getIntent().getStringExtra("Lng");
+        String Nombre = getIntent().getStringExtra("Nombre");
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        LatLng sydney = new LatLng(Double.valueOf(Lat),Double.valueOf(Lng));
+        mMap.addMarker(new MarkerOptions().position(sydney).title(Nombre));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
