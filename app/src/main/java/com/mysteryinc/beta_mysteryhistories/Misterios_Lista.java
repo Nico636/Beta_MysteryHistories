@@ -4,12 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +29,7 @@ public class Misterios_Lista extends AppCompatActivity implements AdapterView.On
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     ListView lv;
     TextView tx;
+    Switch Sw;
     public List<String> lista;
     public ArrayAdapter <String> adaptador;
     @Override
@@ -36,28 +40,34 @@ public class Misterios_Lista extends AppCompatActivity implements AdapterView.On
         lv = (ListView)findViewById(R.id.lv1);
         lv.setOnItemClickListener(this);
         tx = (TextView)findViewById(R.id.textView6);
+        Sw = (Switch)findViewById(R.id.switch1);
 
+
+        Mostrar();
+    }
+    public void Mostrar(){
         String ciudad = getIntent().getStringExtra("datos");
-
         db.collection("misterios")
                 .whereEqualTo("ciudad", ciudad)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        lista = new ArrayList<String>();
                         if (task.isSuccessful()) {
-                            lista = new ArrayList<String>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d("TAG222222", document.getId() + " => " + document.getData());
                                 lista.add(document.getData().get("titulo").toString());
 
                             }
                             if (lista.size() != 0){
+                                tx.setText("LISTA DE MISTERIOS");
                                 Mostrar2(lista);
                             }
 
                         } else {
-                            Log.d("TAG", "Error getting documents: ", task.getException());
+                            Sw.setChecked(false);
+                            Mostrar2(CargarFav());
                         }
                     }
                 });
@@ -74,7 +84,23 @@ public class Misterios_Lista extends AppCompatActivity implements AdapterView.On
 
 
     }
+    public ArrayList<String> CargarFav (){
+        //Conexion a BD
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "mysterydb", null, 1);
+        SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
 
+        String titulo = tx.getText().toString();
+
+        Cursor fila = BaseDeDatos.rawQuery("select * from misterios" , null);
+        ArrayList<String> lista = new ArrayList<String>();
+
+        while(fila.moveToNext()){
+            lista.add(fila.getString(0));
+        }
+        BaseDeDatos.close();
+        tx.setText("LISTA DE FAVORITOS");
+        return lista;
+    }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -84,5 +110,17 @@ public class Misterios_Lista extends AppCompatActivity implements AdapterView.On
         act.putExtra("titulo", lv.getItemAtPosition(position).toString());
         //Lanzar segunda activity
         startActivity(act);
+        //Toast.makeText(this, lv.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+    }
+
+    public void AbrirFavs(View view) {
+        if(view.getId() == R.id.switch1){
+            if (Sw.isChecked()){
+                Mostrar2(CargarFav());
+            }else{
+                Mostrar();
+            }
+
+        }
     }
 }

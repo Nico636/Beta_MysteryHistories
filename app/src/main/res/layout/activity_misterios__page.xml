@@ -82,7 +82,7 @@
         android:clickable="true"
         android:elevation="8dp"
         android:scaleType="centerInside"
-        android:src="@android:drawable/btn_star_big_on"
+        android:src="@drawable/favorito_off"
         app:backgroundTint="#00FFFFFF"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
